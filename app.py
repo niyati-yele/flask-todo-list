@@ -173,7 +173,22 @@ def edit_task(task_id):
         task=task
     )
 
+#the Status Route
+@app.route("/toggle/<int:task_id>")
+def toggle_task(task_id):
 
+    task = Task.query.get_or_404(task_id)
+
+    task.completed = not task.completed
+
+    db.session.commit()
+
+    if task.completed:
+        flash("Task marked as completed!", "success")
+    else:
+        flash("Task marked as pending!", "success")
+
+    return redirect(url_for("home"))
 # ============================================================
 # DELETE TASK
 # ============================================================
