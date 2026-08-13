@@ -1,34 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
 
-    <title>Add Task</title>
-</head>
+{% block title %}
+Add Task
+{% endblock %}
 
-<body>
 
-    <h1>Add New Task</h1>
+{% block content %}
 
-    <form method="POST">
+<div class="row justify-content-center">
 
-        <label for="title">Task:</label>
+    <div class="col-md-8 col-lg-6">
 
-        <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Enter your task"
-        >
+        <div class="card shadow-sm">
 
-        <button type="submit">Add Task</button>
+            <div class="card-body p-4">
 
-    </form>
+                <h2 class="mb-4">
+                    Add New Task
+                </h2>
 
-    <br>
 
-    <a href="{{ url_for('home') }}">Back to Tasks</a>
+                <form method="POST">
 
-</body>
-</html>
+                    <div class="mb-3">
+
+                        <label
+                            for="title"
+                            class="form-label"
+                        >
+                            Task Title
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            name="title"
+                            placeholder="Enter your task"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="d-flex gap-2">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            Add Task
+                        </button>
+
+                        <a
+                            href="{{ url_for('home') }}"
+                            class="btn btn-secondary"
+                        >
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

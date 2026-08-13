@@ -1,49 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
 
-    <title>Edit Task</title>
-</head>
-
-<body>
-
-    <h1>Edit Task</h1>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-
-        {% if messages %}
-
-            {% for category, message in messages %}
-
-                <p>{{ message }}</p>
-
-            {% endfor %}
-
-        {% endif %}
-
-    {% endwith %}
+{% block title %}
+Edit Task
+{% endblock %}
 
 
-    <form method="POST">
+{% block content %}
 
-        <label for="title">Task:</label>
+<div class="row justify-content-center">
 
-        <input
-            type="text"
-            id="title"
-            name="title"
-            value="{{ task.title }}"
-        >
+    <div class="col-md-8 col-lg-6">
 
-        <button type="submit">Save Changes</button>
+        <div class="card shadow-sm">
 
-    </form>
+            <div class="card-body p-4">
 
-    <br>
+                <h2 class="mb-4">
+                    Edit Task
+                </h2>
 
-    <a href="{{ url_for('home') }}">Back to Tasks</a>
 
-</body>
-</html>
+                <form method="POST">
+
+                    <div class="mb-3">
+
+                        <label
+                            for="title"
+                            class="form-label"
+                        >
+                            Task Title
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            name="title"
+                            value="{{ task.title }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="d-flex gap-2">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            Save Changes
+                        </button>
+
+                        <a
+                            href="{{ url_for('home') }}"
+                            class="btn btn-secondary"
+                        >
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
