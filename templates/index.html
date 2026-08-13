@@ -8,9 +8,22 @@
 </head>
 
 <body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+        {% for category, message in messages %}
+
+            <p>{{ message }}</p>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endwith %}
 
     <h1>My To-Do List</h1>
-
+    <a href="{{ url_for('add_task') }}">Add New Task</a>
     {% if tasks %}
 
         <ul>
