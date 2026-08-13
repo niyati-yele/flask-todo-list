@@ -60,6 +60,29 @@ def add_task():
 
     return render_template("add_task.html")
 
+@app.route("/edit/<int:task_id>", methods=["GET", "POST"])
+def edit_task(task_id):
+
+    task = Task.query.get_or_404(task_id)
+
+    if request.method == "POST":
+
+        title = request.form.get("title")
+
+        if not title or not title.strip():
+            flash("Task title cannot be empty.", "error")
+            return redirect(url_for("edit_task", task_id=task.id))
+
+        task.title = title.strip()
+
+        db.session.commit()
+
+        flash("Task updated successfully!", "success")
+
+        return redirect(url_for("home"))
+
+    return render_template("edit_task.html", task=task)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
